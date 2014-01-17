@@ -72,8 +72,8 @@
 		 * Execute the request and generate the output
 		 * @return void
 		 */
-		public function get(){
-			return $this->_send();
+		public function get($json){
+			return $this->_send($json);
 		}
 
 		/**
@@ -124,6 +124,7 @@
 			}
 
 			$ret->raw = $decoded;
+			$ret->json = $resp;
 
 			return $ret;
 		

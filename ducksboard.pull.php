@@ -57,12 +57,12 @@
 		 * @param  stdClass $data Optional data to send
 		 * @return void
 		 */
-		public function pull(stdClass $data = null){
+		public function pull(stdClass $data = null, $json = false){
 			if(false === is_null($data)){
 				$this->_data = $data;
 			}
 
-			return $this->_send();
+			return $this->_send($json);
 		}
 
 		/**
@@ -92,6 +92,7 @@
 			}
 
 			$ret->raw = $decoded;
+			$ret->json = $resp;
 
 			return $ret;
 		

@@ -38,7 +38,7 @@
 
 	if($_GET["type"] == "pull"){
 		$ducksboard = new DucksboardAPIPull($API->endpoint, $API->slot, $API->key);
-		$result = $ducksboard->pull();
+		$result = $ducksboard->pull(null, true);
 	}
 
 	if($_GET["type"] == "dashboard"){

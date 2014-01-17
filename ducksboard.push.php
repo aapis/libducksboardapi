@@ -109,6 +109,7 @@
 			}
 
 			$ret->raw = $decoded;
+			$ret->json = $resp;
 
 			return $ret;
 		}

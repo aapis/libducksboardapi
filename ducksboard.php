@@ -34,15 +34,15 @@
 		 * Sends the request to Ducksboard and manages the output
 		 * @return void
 		 */
-		protected function _send(){
+		protected function _send($json){
 			try {
-				$result = $this->_request();
+				$result = $this->_request($json);
 
 				if(is_null($result)){
 					throw new Exception("There was an error processing the request.");
 				}
 
-				$this->_out($result);
+				$this->_out($result, $json);
 			}catch(Exception $e){
 				echo $e->getMessage();
 			}
@@ -68,47 +68,51 @@
 		 * @param  stdClass $result
 		 * @return void
 		 */
-		protected function _out(stdClass $result){
+		protected function _out(stdClass $result, $json = false){
 			$output = "";
 
-			if(PHP_SAPI == "cli"){
-				$output .= sprintf("Request Status: %s\n", ($this->isSuccess($result) ? "Success" : "Error"));
-				$output .= sprintf("Request Type: %s\n", $this->_getClassType());
-				$output .= "Request Data: \n";
-				var_dump($result->data);
-			}else {
-				$output .= "<ul>";
-				$output .= sprintf("<li>Request Status: <strong>%s</strong></li>", ($this->isSuccess($result) ? "Success" : "Error"));
-				$output .= sprintf("<li>Request Type: <strong>%s</strong></li>", $this->_getClassType());
-				$output .= "<li>Request Data:";
+			if(false === $json){
+				if(PHP_SAPI == "cli"){
+					$output .= sprintf("Request Status: %s\n", ($this->isSuccess($result) ? "Success" : "Error"));
+					$output .= sprintf("Request Type: %s\n", $this->_getClassType());
+					$output .= "Request Data: \n";
+					var_dump($result->data);
+				}else {
 					$output .= "<ul>";
+					$output .= sprintf("<li>Request Status: <strong>%s</strong></li>", ($this->isSuccess($result) ? "Success" : "Error"));
+					$output .= sprintf("<li>Request Type: <strong>%s</strong></li>", $this->_getClassType());
+					$output .= "<li>Request Data:";
+						$output .= "<ul>";
 
-					if(isset($result->raw)){
-						$iterator = $result->raw;
-					}else {
-						//for dashboards?!
-						if(isset($result->data->data)){
-							$iterator = $result->data->data;
-						}
-						//for pulls
-						$iterator = $result->data;
-					}
-
-					foreach($iterator as $key => $value){
-						if(is_array($value)){
-							for($i = 0; $i < sizeof($value); $i++){								
-								if(isset($value[$i]->dashboard_id)){ //result is a dashboard
-									$output .= sprintf("<li>Dashboard ID: <strong>%s</strong><br />Layout: <strong>%s</strong><br />Name: <strong>%s</strong><br />Background: <strong>%s</strong><br />Slug: <strong>%s</strong></li>", $value[$i]->dashboard_id, $value[$i]->layout, $value[$i]->name, $value[$i]->background, $value[$i]->slug); 
-								}else {
-									$output .= sprintf("<li>%s - <strong>%s</strong></li>", $value[$i]->value->title, $value[$i]->value->content);
-								}
-							}
+						if(isset($result->raw)){
+							$iterator = $result->raw;
 						}else {
-							$output .= sprintf("<li>%s - <strong>%s</strong></li>", $key, $value);
+							//for dashboards?!
+							if(isset($result->data->data)){
+								$iterator = $result->data->data;
+							}
+							//for pulls
+							$iterator = $result->data;
 						}
-					}
-					$output .= "</ul></li>";
-				$output .= "</ul>";
+
+						foreach($iterator as $key => $value){
+							if(is_array($value)){
+								for($i = 0; $i < sizeof($value); $i++){								
+									if(isset($value[$i]->dashboard_id)){ //result is a dashboard
+										$output .= sprintf("<li>Dashboard ID: <strong>%s</strong><br />Layout: <strong>%s</strong><br />Name: <strong>%s</strong><br />Background: <strong>%s</strong><br />Slug: <strong>%s</strong></li>", $value[$i]->dashboard_id, $value[$i]->layout, $value[$i]->name, $value[$i]->background, $value[$i]->slug); 
+									}else {
+										$output .= sprintf("<li>%s - <strong>%s</strong></li>", $value[$i]->value->title, $value[$i]->value->content);
+									}
+								}
+							}else {
+								$output .= sprintf("<li>%s - <strong>%s</strong></li>", $key, $value);
+							}
+						}
+						$output .= "</ul></li>";
+					$output .= "</ul>";
+				}
+			}else {
+				$output = $result->json;
 			}
 
 			echo $output;
