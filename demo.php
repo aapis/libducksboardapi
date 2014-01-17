@@ -33,17 +33,17 @@
 
 	if($_GET["type"] == "push"){
 		$ducksboard = new DucksboardAPIPush($data2, $API->slot, $API->key);
-		$result = $ducksboard->push(true);
+		$result = $ducksboard->runAction(true);
 	}
 
 	if($_GET["type"] == "pull"){
 		$ducksboard = new DucksboardAPIPull($API->endpoint, $API->slot, $API->key);
-		$result = $ducksboard->pull(true);
+		$result = $ducksboard->runAction(true);
 	}
 
 	if($_GET["type"] == "dashboard"){
 		$ducksboard = new DucksboardAPIDashboard($API->request_type, $API->dashboard_id, $API->key);
-		$result = $ducksboard->get(true);
+		$result = $ducksboard->runAction(true);
 	}
 
 	echo $result;

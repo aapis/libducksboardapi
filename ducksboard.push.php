@@ -72,7 +72,7 @@
 		 * @param  stdClass $data Optional data to request
 		 * @return void
 		 */
-		public function push($json = false, stdClass $data = null){
+		public function runAction($json = false, stdClass $data = null){
 			if(false === is_null($data)){
 				$this->_data = $data;
 			}

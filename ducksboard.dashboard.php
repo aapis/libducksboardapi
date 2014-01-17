@@ -72,7 +72,7 @@
 		 * Execute the request and generate the output
 		 * @return void
 		 */
-		public function get($json = false){
+		public function runAction($json = false){
 			return $this->_send($json);
 		}
 
