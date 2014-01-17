@@ -27,24 +27,20 @@
 		 * @param int     $source   Your widget's slot number
 		 * @param string  $skeleton The API key
 		 */
-		public function __construct($request_type = null, $dashboard_id = null, $skeleton = null){
+		public function __construct($request_type = null, $dashboard_slug = null, $skeleton = null){
 			try {
 				//begin basic error handling
 				if(is_null($skeleton)){
 					throw new Exception("API key is required to make the request");
 				}
 
-				if(is_null($dashboard_id)){
-					throw new Exception("An endpoint is required to make the request");
-				}
-
 				$this->_http_request_type = $this->_processRequestType($request_type);
 				$this->_key = sprintf("%s:ignored", $skeleton);
-				$this->_url = sprintf("https://app.ducksboard.com/api/dashboards", $dashboard_id);
 
-				//no id provided? return all of them
-				if(is_null($dashboard_id) || false === is_numeric($dashboard_id)){
-					$this->_url = "https://app.ducksboard.com/api/dashboards";
+				if(false === is_null($dashboard_slug)){
+					$this->_url = sprintf("https://app.ducksboard.com/api/dashboards/%s", $dashboard_slug);
+				}else { //no id provided? return all of them
+					$this->_url = "https://app.ducksboard.com/api/dashboards";	
 				}
 			}catch(Exception $e){
 				echo $e->getMessage();

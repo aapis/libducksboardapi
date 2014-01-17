@@ -12,7 +12,7 @@
 	$API->slot = 308066;
 	$API->key = "nu0WijZcIQdWE7ataiyV0lQ9MtoAQyEP2VCts5AJ9aM1Bu8pHK"; //this is a dev account API key; they're free, get your own
 	$API->endpoint = "/last?count=5";
-	$API->dashboard_id = 00;
+	$API->dashboard_slug = "main-dashboard";
 	$API->request_type = "GET";
 
 	/*
@@ -42,7 +42,7 @@
 	}
 
 	if($_GET["type"] == "dashboard"){
-		$ducksboard = new DucksboardAPIDashboard($API->request_type, $API->dashboard_id, $API->key);
+		$ducksboard = new DucksboardAPIDashboard($API->request_type, $API->dashboard_slug, $API->key);
 		$result = $ducksboard->runAction(true);
 	}
 
