@@ -9,7 +9,7 @@
 	 */
 	$API = new stdClass();
 	$API->slot = 308066;
-	$API->key = "nu0WijZcIQdWE7ataiyV0lQ9MtoAQyEP2VCts5AJ9aM1Bu8pHK:ignored"; //this is a free dev account API key; they're free, get your own
+	$API->key = "nu0WijZcIQdWE7ataiyV0lQ9MtoAQyEP2VCts5AJ9aM1Bu8pHK:ignored"; //this is a dev account API key; they're free, get your own
 	$API->endpoint = "/last?count=5";
 
 	/*
