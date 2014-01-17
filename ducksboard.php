@@ -1,47 +1,11 @@
 <?php
 
 	class DucksboardAPI {
-		private $_key;
-		private $_url;
-		private $_data;
+		protected $_key;
+		protected $_url;
+		protected $_data;
 
-		public function __construct(stdClass $data = null, $destination = null, $skeleton = null){
-			try {
-				if(is_null($skeleton)){
-					throw new Exception("API key is required to make the request");
-				}
-
-				if(is_null($destination)){
-					throw new Exception("A slot is required to make the request");
-				}
-
-				$this->_key = sprintf("%s:ignored", $skeleton);
-				$this->_url = sprintf("https://push.ducksboard.com/v/%d", $destination);
-
-				if(is_null($data)){
-					$this->_data = new stdClass();
-				}else {
-					//ducksboard requires the "value" key, so if the data object
-					//doesn't have one we need to add it to the object
-					if(false === property_exists($data, "value")){
-						$data->value = new stdClass();
-
-						foreach($data as $key => $value){
-							if($key !== "value"){
-								$data->value->{$key} = $value;
-
-								unset($data->{$key});
-							}
-						}
-					}
-
-					$this->_data = $data;
-				}
-
-			}catch(Exception $e){
-				echo $e->getMessage();
-			}
-
+		public function __construct(){
 			return $this;
 		}
 
@@ -63,7 +27,7 @@
 			}
 		}
 
-		private function _out($result){
+		protected function _out($result){
 			$output = "";
 
 			if(PHP_SAPI == "cli"){
@@ -90,7 +54,7 @@
 		 * @param  [type] $url [description]
 		 * @return [type]      [description]
 		 */
-		private function _request(){
+		protected function _request(){
 			try{
 				if(is_null($this->_url)){
 					throw new Exception("You've entered an invalid slot");
