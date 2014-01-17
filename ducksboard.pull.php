@@ -54,9 +54,14 @@
 
 		/**
 		 * Execute the request and generate the output
+		 * @param  stdClass $data Optional data to send
 		 * @return void
 		 */
-		public function pull(){
+		public function push(stdClass $data = null){
+			if(false === is_null($data)){
+				$this->_data = $data;
+			}
+
 			return $this->_send();
 		}
 

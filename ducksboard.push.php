@@ -69,9 +69,14 @@
 
 		/**
 		 * Execute the request and generate the output
+		 * @param  stdClass $data Optional data to request
 		 * @return void
 		 */
-		public function push(){
+		public function push(stdClass $data = null){
+			if(false === is_null($data)){
+				$this->_data = $data;
+			}
+
 			return $this->_send();
 		}
 
