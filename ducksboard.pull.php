@@ -1,6 +1,6 @@
 <?php
 
-	class DucksboardAPIPush extends DucksboardAPI {
+	class DucksboardAPIPull extends DucksboardAPI {
 		public function __construct(stdClass $data = null, $destination = null, $skeleton = null){
 			try {
 				if(is_null($skeleton)){
