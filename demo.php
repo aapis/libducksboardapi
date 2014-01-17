@@ -13,7 +13,7 @@
 	$API->key = "nu0WijZcIQdWE7ataiyV0lQ9MtoAQyEP2VCts5AJ9aM1Bu8pHK"; //this is a dev account API key; they're free, get your own
 	$API->endpoint = "/last?count=5";
 	$API->dashboard_id = 00;
-	$API->request_type = "PUT";
+	$API->request_type = "GET";
 
 	/*
 	 * Sample data sets

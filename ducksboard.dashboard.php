@@ -83,7 +83,8 @@
 		protected function _request(){
 			$handler = curl_init();
 			$curlopts = array(
-				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_RETURNTRANSFER => 1,
+				CURLOPT_FOLLOWLOCATION => 1,
 				CURLOPT_URL => $this->_url,
 				CURLOPT_USERAGENT => "Free Request",
 				CURLOPT_USERPWD => $this->_key,
@@ -93,6 +94,7 @@
 			switch($this->_http_request_type){
 				case "POST":
 					$curlopts[CURLOPT_POST] = 1;
+					$curlopts[CURLOPT_POSTFIELDS] = array(); //post data to send
 				break;
 
 				case "PUT":
@@ -107,8 +109,6 @@
 				case "GET":
 					break;
 			}
-
-			die(var_dump($curlopts));
 
 			curl_setopt_array($handler, $curlopts);
 
