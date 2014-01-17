@@ -1,17 +1,38 @@
 <?php
-
+	
+	/**
+	 * DucksboardAPI
+	 * A simple library to make interfacing with the Ducksboard API easier
+	 *
+	 * DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
+	 *                    Version 2, December 2004 
+	 *
+	 * Copyright (C) 2004 Sam Hocevar <sam@hocevar.net> 
+	 *
+	 * Everyone is permitted to copy and distribute verbatim or modified 
+	 * copies of this license document, and changing it is allowed as long 
+	 * as the name is changed. 
+	 *
+	 *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
+	 *   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION 
+	 *
+	 *  0. You just DO WHAT THE FUCK YOU WANT TO.
+	 */
 	class DucksboardAPI {
 		protected $_key;
 		protected $_url;
 		protected $_data;
 
+		/**
+		 * Construct nothing, chain it
+		 */
 		public function __construct(){
 			return $this;
 		}
 
 		/**
-		 * [send description]
-		 * @return [type] [description]
+		 * Sends the request to Ducksboard and manages the output
+		 * @return void
 		 */
 		protected function _send(){
 			try {
@@ -27,7 +48,12 @@
 			}
 		}
 
-		protected function _out($result){
+		/**
+		 * Writes output to the screen/terminal
+		 * @param  stdClass $result
+		 * @return void
+		 */
+		protected function _out(stdClass $result){
 			$output = "";
 
 			if(PHP_SAPI == "cli"){
@@ -64,7 +90,10 @@
 			echo $output;
 		}
 
-
+		/**
+		 * Gets the type of request from the class name
+		 * @return string]
+		 */
 		protected function _getClassType(){
 			$class = get_class($this);
 			$class = str_replace("DucksboardAPI", "", $class);

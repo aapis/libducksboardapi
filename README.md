@@ -12,6 +12,6 @@ $result = $ducksboard->push();
 
 **Pull data from a dashboard**
 ```php
-$ducksboard = new DucksboardAPIPull($endpoint, $API->slot, $API->key);
+$ducksboard = new DucksboardAPIPull($API->endpoint, $API->slot, $API->key);
 $result = $ducksboard->pull();
 ```

@@ -10,6 +10,7 @@
 	$API = new stdClass();
 	$API->slot = 308066;
 	$API->key = "nu0WijZcIQdWE7ataiyV0lQ9MtoAQyEP2VCts5AJ9aM1Bu8pHK:ignored";
+	$API->endpoint = "/last?count=5";
 
 	/*
 	 * Sample data sets
@@ -33,9 +34,7 @@
 	}
 
 	if($_GET["type"] == "pull"){
-		$endpoint = "/last?count=5";
-
-		$ducksboard = new DucksboardAPIPull($endpoint, $API->slot, $API->key);
+		$ducksboard = new DucksboardAPIPull($API->endpoint, $API->slot, $API->key);
 		$result = $ducksboard->pull();
 	}
 

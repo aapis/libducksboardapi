@@ -1,6 +1,31 @@
 <?php
 
+	/**
+	 * DucksboardAPIPush
+	 * A simple library to make interfacing with the Ducksboard Push API easier
+	 *
+	 * DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
+	 *                    Version 2, December 2004 
+	 *
+	 * Copyright (C) 2004 Sam Hocevar <sam@hocevar.net> 
+	 *
+	 * Everyone is permitted to copy and distribute verbatim or modified 
+	 * copies of this license document, and changing it is allowed as long 
+	 * as the name is changed. 
+	 *
+	 *            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
+	 *   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION 
+	 *
+	 *  0. You just DO WHAT THE FUCK YOU WANT TO.
+	 */
 	class DucksboardAPIPush extends DucksboardAPI {
+
+		/**
+		 * Setup the class variables that we need to run the request
+		 * @param stdClass  $data     Data you want to push to your widget
+		 * @param int       $source   Your widget's slot number
+		 * @param string    $skeleton The API key
+		 */
 		public function __construct(stdClass $data = null, $destination = null, $skeleton = null){
 			try {
 				if(is_null($skeleton)){
@@ -51,9 +76,8 @@
 		}
 
 		/**
-		 * [_request description]
-		 * @param  [type] $url [description]
-		 * @return [type]      [description]
+		 * Run the request and push data to your widget/dashboard
+		 * @return stdClass
 		 */
 		protected function _request(){
 			$payload = json_encode($this->_data);
