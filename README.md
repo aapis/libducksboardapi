@@ -7,11 +7,17 @@ Ducksboard (http://ducksboard.com) has an API, but no PHP library.  Now it does.
 **Push data to a widget**
 ```php
 $ducksboard = new DucksboardAPIPush($data, $API->slot, $API->key);
-$result = $ducksboard->push();
+$result = $ducksboard->runAction(true);
 ```
 
-**Pull data from a dashboard**
+**Pull data from a widget**
 ```php
 $ducksboard = new DucksboardAPIPull($API->endpoint, $API->slot, $API->key);
-$result = $ducksboard->pull();
+$result = $ducksboard->runAction(true);
+```
+
+**Pull data from all, or a specific dashboard**
+```php
+$ducksboard = new DucksboardAPIDashboard($API->request_type, $API->dashboard_slug, $API->key);
+$result = $ducksboard->runAction(true);
 ```
