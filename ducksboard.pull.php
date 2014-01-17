@@ -1,7 +1,7 @@
 <?php
 	
 	/**
-	 * DucksboardAPI
+	 * DucksboardAPIPull
 	 * A simple library to make interfacing with the Ducksboard Pull API easier
 	 *
 	 * DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
