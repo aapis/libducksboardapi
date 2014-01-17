@@ -2,6 +2,7 @@
 	
 	include("ducksboard.php");
 	include("ducksboard.push.php");
+	include("ducksboard.pull.php");
 	
 	/*
 	 * API data object
@@ -26,8 +27,17 @@
 	$data3 = new stdClass();
 	$data3->delta = 7.25;
 
-	$ducksboard = new DucksboardAPIPush($data2, $API->slot, $API->key);
-	$result = $ducksboard->push();
+	if($_GET["type"] == "push"){
+		$ducksboard = new DucksboardAPIPush($data2, $API->slot, $API->key);
+		$result = $ducksboard->push();
+	}
+
+	if($_GET["type"] == "pull"){
+		$pullData = "/test";
+
+		$ducksboard = new DucksboardAPIPull($pullData, $API->slot, $API->key);
+		$result = $ducksboard->pull();
+	}
 
 	echo $result;
 

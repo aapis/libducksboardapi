@@ -58,44 +58,6 @@
 
 			return $class;
 		}
-
-		/**
-		 * [_request description]
-		 * @param  [type] $url [description]
-		 * @return [type]      [description]
-		 */
-		protected function _request(){
-			try{
-				if(is_null($this->_url)){
-					throw new Exception("You've entered an invalid slot");
-				}
-
-				$payload = json_encode($this->_data);
-
-				$handler = curl_init();
-				curl_setopt_array($handler, array(
-					CURLOPT_RETURNTRANSFER => true,
-					CURLOPT_POST => 1,
-					CURLOPT_POSTFIELDS => $payload,
-					CURLOPT_URL => $this->_url,
-					CURLOPT_USERAGENT => "Free Request",
-					CURLOPT_USERPWD => $this->_key,
-					));
-
-				$resp = curl_exec($handler);
-				$decoded = json_decode($resp);
-				$ret = new stdClass();
-
-				if(property_exists($decoded, "response")){
-					$ret->success = ($decoded->response == "ok");
-					$ret->data = $decoded;
-
-					return $ret;
-				}
-			}catch(Exception $e){
-				echo $e->getMessage();
-			}
-		}
 	}
 
 ?>
