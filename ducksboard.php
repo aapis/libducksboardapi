@@ -50,7 +50,6 @@
 
 					foreach($iterator as $key => $value){
 						if(is_array($value)){
-							//foreach($value as $k => $v){
 							for($i = 0; $i < sizeof($value); $i++){
 								$output .= sprintf("<li>%s - %s</li>", $value[$i]->value->title, $value[$i]->value->content);
 							}

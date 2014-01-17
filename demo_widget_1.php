@@ -21,8 +21,8 @@
 	$data->value->link = "http://wearefree.ca";
 
 	$data2 = new stdClass();
-	$data2->title = "test";
-	$data2->content = "content";
+	$data2->title = "test something ". rand(0,30);
+	$data2->content = "Lorem ipsum dolor set.";
 
 	$data3 = new stdClass();
 	$data3->delta = 7.25;
