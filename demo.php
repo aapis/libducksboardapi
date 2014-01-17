@@ -3,14 +3,17 @@
 	include("ducksboard.php");
 	include("ducksboard.push.php");
 	include("ducksboard.pull.php");
+	include("ducksboard.dashboard.php");
 	
 	/*
 	 * API data object
 	 */
 	$API = new stdClass();
 	$API->slot = 308066;
-	$API->key = "nu0WijZcIQdWE7ataiyV0lQ9MtoAQyEP2VCts5AJ9aM1Bu8pHK:ignored"; //this is a dev account API key; they're free, get your own
+	$API->key = "nu0WijZcIQdWE7ataiyV0lQ9MtoAQyEP2VCts5AJ9aM1Bu8pHK"; //this is a dev account API key; they're free, get your own
 	$API->endpoint = "/last?count=5";
+	$API->dashboard_id = 00;
+	$API->request_type = "PUT";
 
 	/*
 	 * Sample data sets
@@ -36,6 +39,11 @@
 	if($_GET["type"] == "pull"){
 		$ducksboard = new DucksboardAPIPull($API->endpoint, $API->slot, $API->key);
 		$result = $ducksboard->pull();
+	}
+
+	if($_GET["type"] == "dashboard"){
+		$ducksboard = new DucksboardAPIDashboard($API->request_type, $API->dashboard_id, $API->key);
+		$result = $ducksboard->get();
 	}
 
 	echo $result;
