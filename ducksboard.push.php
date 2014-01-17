@@ -41,6 +41,14 @@
 
 			return $this;
 		}
+
+		/**
+		 * Execute the request and generate the output
+		 * @return void
+		 */
+		public function push(){
+			return $this->_send();
+		}
 	}
 
 ?>

@@ -27,7 +27,7 @@
 	$data3->delta = 7.25;
 
 	$ducksboard = new DucksboardAPIPush($data2, $API->slot, $API->key);
-	$result = $ducksboard->send();
+	$result = $ducksboard->push();
 
 	echo $result;
 
