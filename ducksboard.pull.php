@@ -57,7 +57,7 @@
 		 * @param  stdClass $data Optional data to send
 		 * @return void
 		 */
-		public function pull(stdClass $data = null, $json = false){
+		public function pull($json = false, stdClass $data = null){
 			if(false === is_null($data)){
 				$this->_data = $data;
 			}

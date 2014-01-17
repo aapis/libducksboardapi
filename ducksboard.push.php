@@ -72,12 +72,12 @@
 		 * @param  stdClass $data Optional data to request
 		 * @return void
 		 */
-		public function push(stdClass $data = null){
+		public function push($json = false, stdClass $data = null){
 			if(false === is_null($data)){
 				$this->_data = $data;
 			}
 
-			return $this->_send();
+			return $this->_send($json);
 		}
 
 		/**
@@ -99,7 +99,9 @@
 
 			$resp = curl_exec($handler);
 			$decoded = json_decode($resp);
+			
 			$ret = new stdClass();
+			$ret->json = $resp;
 
 			if(property_exists($decoded, "response")){
 				$ret->success = ($decoded->response == "ok");
@@ -109,7 +111,6 @@
 			}
 
 			$ret->raw = $decoded;
-			$ret->json = $resp;
 
 			return $ret;
 		}
