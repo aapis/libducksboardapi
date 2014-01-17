@@ -42,15 +42,11 @@
 		 * @return [type]      [description]
 		 */
 		protected function _request(){
-			//$payload = json_encode($this->_data);
 			$payload = $this->_url.$this->_endpoint;
-			die($payload);
 
 			$handler = curl_init();
 			curl_setopt_array($handler, array(
 				CURLOPT_RETURNTRANSFER => true,
-				CURLOPT_POST => 1,
-				//CURLOPT_POSTFIELDS => $payload,
 				CURLOPT_URL => $payload,
 				CURLOPT_USERAGENT => "Free Request",
 				CURLOPT_USERPWD => $this->_key,
@@ -66,6 +62,10 @@
 
 				return $ret;
 			}
+
+			$ret->raw = $decoded;
+
+			return $ret;
 		
 		}
 	}

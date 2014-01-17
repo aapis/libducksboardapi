@@ -33,9 +33,9 @@
 	}
 
 	if($_GET["type"] == "pull"){
-		$pullData = "/test";
+		$endpoint = "/last?count=5";
 
-		$ducksboard = new DucksboardAPIPull($pullData, $API->slot, $API->key);
+		$ducksboard = new DucksboardAPIPull($endpoint, $API->slot, $API->key);
 		$result = $ducksboard->pull();
 	}
 
