@@ -57,7 +57,7 @@
 		 * @param  stdClass $data Optional data to send
 		 * @return void
 		 */
-		public function push(stdClass $data = null){
+		public function pull(stdClass $data = null){
 			if(false === is_null($data)){
 				$this->_data = $data;
 			}
