@@ -1,7 +1,7 @@
 libducksboardapi
 ================
 
-Ducksboard (http://ducksboard.com) has an API, but no PHP library.  Now it does.
+Ducksboard (http://ducksboard.com) has an API, but no PHP library.  Now it does.  This makes it a lot quicker to create dashboard widgets than manually running cURL queries in the terminal.
 
 ## Usage
 **Push data to a widget**
