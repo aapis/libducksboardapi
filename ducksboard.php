@@ -22,8 +22,8 @@
 		protected $_key;
 		protected $_url;
 		protected $_data;
+		protected $_errors = 0;
 
-		private $_errors = 0;
 		private $_pointer;
 
 		/**
@@ -71,7 +71,7 @@
 		 */
 		protected function _send($json){
 			try {
-				if($this->_errors > 0){
+				if($this->_errors === 0){
 					$result = $this->_pointer->_request($json);
 
 					//set content type to application/json so page can act as a 
@@ -84,7 +84,9 @@
 						throw new Exception("There was an error processing the request.");
 					}
 
-					$this->_out($result, $json);
+					if(false === isset($result->raw->errors)){
+						$this->_out($result, $json);
+					}
 				}
 			}catch(Exception $e){
 				echo $e->getMessage();

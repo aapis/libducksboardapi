@@ -11,7 +11,7 @@
 	$API = new stdClass();
 	$API->slot = 308066;
 	$API->key = "nu0WijZcIQdWE7ataiyV0lQ9MtoAQyEP2VCts5AJ9aM1Bu8pHK"; //this is a dev account API key; they're free, get your own
-	$API->endpoint = "/test";//"/last?count=5";
+	$API->endpoint = "/last?count=2";
 	$API->dashboard_slug = "main-dashboard";
 	$API->request_type = "GET";
 

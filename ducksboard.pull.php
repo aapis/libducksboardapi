@@ -27,6 +27,7 @@
 		 */
 		private $_allowed_endpoints = array(
 				"/last",
+				"/timezone",
 			);
 
 		/**
@@ -67,8 +68,8 @@
 		 */
 		private function _validateEndpoint($endpoint){
 			try{
-				foreach($this->_allowed_endpoints as $ep){
-					if(strpos($ep, $endpoint) !== false){
+				foreach($this->_allowed_endpoints as $allowed){
+					if(strstr($endpoint, $allowed) !== false){
 						return $endpoint;
 					}
 				}

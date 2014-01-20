@@ -63,7 +63,7 @@
 
 			return "GET";
 		}
-
+		
 		/**
 		 * Run the request and pull data from your widget/dashboard
 		 * @return stdClass
