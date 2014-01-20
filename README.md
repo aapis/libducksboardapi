@@ -35,5 +35,10 @@ $ducksboard->runAction(true, $newDataSet);
 
 So long as you want to run the same action multiple times (i.e. insert multiple items into a widget, create several dashboards, etc) you can just keep referencing the object which instantiates the type of request you want to run.
 
+|Method|Arguments|
+|:----:|---------|
+|DashboardAPI|string $type, array $parameters|
+|DashboardAPI::runAction|boolean $json, stdClass $data|
+
 ## "Copyright"
 Obviously this is open source and also WTFPL licensed, but it was originally written for use in a project at http://wearefree.ca so I feel there should be at least be a link pointing people to where they can find the final product.
