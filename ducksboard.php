@@ -38,6 +38,12 @@
 			try {
 				$result = $this->_request($json);
 
+				//set content type to application/json so page can act as a 
+				//middleman for other services
+				if($json){
+					header("Content-type: application/json");
+				}
+
 				if(is_null($result)){
 					throw new Exception("There was an error processing the request.");
 				}
