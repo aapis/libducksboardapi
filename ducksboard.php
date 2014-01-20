@@ -23,11 +23,46 @@
 		protected $_url;
 		protected $_data;
 
+		private $_errors = 0;
+		private $_pointer;
+
 		/**
-		 * Construct nothing, chain it
+		 * Instantiate the right class
 		 */
-		public function __construct(){
-			return $this;
+		public function __construct($type = null, $args = array()){
+			try {
+				if(false === is_null($type)){
+					$slug = ucwords(strtolower($type));
+					$dbapi_class = sprintf("DucksboardAPI%s", $slug);
+
+					if(class_exists($dbapi_class)){
+						$refl = new ReflectionClass($dbapi_class);
+
+						$this->_pointer = $refl->newInstanceArgs($args);
+
+						return $this->_pointer;
+					}					
+				}else {
+					$this->_errors++;
+				}
+
+				throw new Exception(sprintf("Invalid DucksboardAPI class : %s", $type));
+			}catch(Exception $e){
+				echo $e->getMessage();
+			}
+		}
+
+		/**
+		 * Execute the request and generate the output
+		 * @param  stdClass $data Optional data to request
+		 * @return void
+		 */
+		public function runAction($json = false, stdClass $data = null){
+			if(false === is_null($data)){
+				$this->_data = $data;
+			}
+
+			return $this->_send($json);
 		}
 
 		/**
@@ -36,19 +71,21 @@
 		 */
 		protected function _send($json){
 			try {
-				$result = $this->_request($json);
+				if($this->_errors > 0){
+					$result = $this->_pointer->_request($json);
 
-				//set content type to application/json so page can act as a 
-				//middleman for other services
-				if($json){
-					header("Content-type: application/json");
+					//set content type to application/json so page can act as a 
+					//middleman for other services
+					if($json){
+						header("Content-type: application/json");
+					}
+
+					if(is_null($result)){
+						throw new Exception("There was an error processing the request.");
+					}
+
+					$this->_out($result, $json);
 				}
-
-				if(is_null($result)){
-					throw new Exception("There was an error processing the request.");
-				}
-
-				$this->_out($result, $json);
 			}catch(Exception $e){
 				echo $e->getMessage();
 			}

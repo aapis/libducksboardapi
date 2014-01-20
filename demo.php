@@ -11,7 +11,7 @@
 	$API = new stdClass();
 	$API->slot = 308066;
 	$API->key = "nu0WijZcIQdWE7ataiyV0lQ9MtoAQyEP2VCts5AJ9aM1Bu8pHK"; //this is a dev account API key; they're free, get your own
-	$API->endpoint = "/last?count=5";
+	$API->endpoint = "/test";//"/last?count=5";
 	$API->dashboard_slug = "main-dashboard";
 	$API->request_type = "GET";
 
@@ -32,17 +32,17 @@
 	$data3->delta = 7.25;
 
 	if($_GET["type"] == "push"){
-		$ducksboard = new DucksboardAPIPush($data2, $API->slot, $API->key);
+		$ducksboard = new DucksboardAPI("push", array($data2, $API->slot, $API->key));
 		$result = $ducksboard->runAction(true);
 	}
 
 	if($_GET["type"] == "pull"){
-		$ducksboard = new DucksboardAPIPull($API->endpoint, $API->slot, $API->key);
+		$ducksboard = new DucksboardAPI("pull", array($API->endpoint, $API->slot, $API->key));
 		$result = $ducksboard->runAction(true);
 	}
 
 	if($_GET["type"] == "dashboard"){
-		$ducksboard = new DucksboardAPIDashboard($API->request_type, $API->dashboard_slug, $API->key);
+		$ducksboard = new DucksboardAPI("dashboard", array($API->request_type, $API->dashboard_slug, $API->key));
 		$result = $ducksboard->runAction(true);
 	}
 

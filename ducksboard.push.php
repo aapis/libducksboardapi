@@ -68,19 +68,6 @@
 		}
 
 		/**
-		 * Execute the request and generate the output
-		 * @param  stdClass $data Optional data to request
-		 * @return void
-		 */
-		public function runAction($json = false, stdClass $data = null){
-			if(false === is_null($data)){
-				$this->_data = $data;
-			}
-
-			return $this->_send($json);
-		}
-
-		/**
 		 * Run the request and push data to your widget/dashboard
 		 * @return stdClass
 		 */

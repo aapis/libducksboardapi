@@ -65,14 +65,6 @@
 		}
 
 		/**
-		 * Execute the request and generate the output
-		 * @return void
-		 */
-		public function runAction($json = false){
-			return $this->_send($json);
-		}
-
-		/**
 		 * Run the request and pull data from your widget/dashboard
 		 * @return stdClass
 		 */

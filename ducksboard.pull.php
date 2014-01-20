@@ -22,6 +22,14 @@
 		private $_endpoint;
 
 		/**
+		 * Endpoints supported by Ducksboard
+		 * @var array
+		 */
+		private $_allowed_endpoints = array(
+				"/last",
+			);
+
+		/**
 		 * Setup the class variables that we need to run the request
 		 * @param string  $endpoint The API endpoint you want data from
 		 * @param int     $source   Your widget's slot number
@@ -44,7 +52,7 @@
 
 				$this->_key = sprintf("%s:ignored", $skeleton);
 				$this->_url = sprintf("https://pull.ducksboard.com/v/%d", $source);
-				$this->_endpoint = $endpoint;
+				$this->_endpoint = $this->_validateEndpoint($endpoint);
 			}catch(Exception $e){
 				echo $e->getMessage();
 			}
@@ -53,16 +61,22 @@
 		}
 
 		/**
-		 * Execute the request and generate the output
-		 * @param  stdClass $data Optional data to send
-		 * @return void
+		 * Filter out invalid data
+		 * @param  [type] $endpoint [description]
+		 * @return [type]           [description]
 		 */
-		public function runAction($json = false, stdClass $data = null){
-			if(false === is_null($data)){
-				$this->_data = $data;
-			}
+		private function _validateEndpoint($endpoint){
+			try{
+				foreach($this->_allowed_endpoints as $ep){
+					if(strpos($ep, $endpoint) !== false){
+						return $endpoint;
+					}
+				}
 
-			return $this->_send($json);
+				throw new Exception(sprintf("Invalid endpoint: %s", $endpoint));
+			}catch(Exception $e){
+				echo $e->getMessage();
+			}
 		}
 
 		/**
